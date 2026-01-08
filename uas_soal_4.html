@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      .kontenContainer {
+        margin: 20px 0;
+        padding: 20px 10px;
+        border: 1px dashed black;
+      }
+
+      .transform {
+        transform: translateY(-10px);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Element Interaktif</h1>
+    <input type="text" placeholder="Masukkan nama" id="nama" />
+    <button onclick="tampilkan()">tampilkan</button>
+
+    <div id="konten" class="kontenContainer">Arahkan kursor ke element ini</div>
+
+    <p id="pesan"></p>
+
+    <script>
+      const tampilkan = () => {
+        const nama = document.getElementById("nama").value;
+        const pesan = document.getElementById("pesan");
+        const konten = document.getElementById("konten");
+        if (nama) {
+          kontenContainer.style.backgroundColor = "rgb(169, 212, 214)";
+
+          konten.innerText = `Halo ${nama}!`;
+        } else {
+          pesan.innerText = "Nama harus diisi";
+        }
+      };
+
+      const kontenContainer = document.getElementById("konten");
+
+      kontenContainer.addEventListener("mouseover", () => {
+        kontenContainer.style.backgroundColor = "cyan";
+        kontenContainer.classList.add("transform");
+
+        setTimeout(() => {
+          kontenContainer.style.backgroundColor = "white";
+          kontenContainer.classList.remove("transform");
+        }, 2000);
+      });
+    </script>
+  </body>
+</html>

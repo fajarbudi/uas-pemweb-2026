@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tahun Kabisat</title>
+  </head>
+  <body>
+    <h1>Tahun Kabisat</h1>
+    <label for="tahun">Masukkan tahun</label>
+    <input type="number" id="tahun" />
+    <button onclick="hitung()">cek</button>
+    <br />
+    <p id="keterangan"></p>
+
+    <script>
+      const hitung = () => {
+        const tahun = document.getElementById("tahun").value;
+        const keterangan = document.getElementById("keterangan");
+
+        if (tahun % 400 == 0 || (tahun % 100 != 0 && tahun % 4 == 0)) {
+          keterangan.innerHTML = `Tahun <strong>${tahun}</strong> adalah tahun kabisat`;
+        } else {
+          keterangan.innerHTML = `Tahun <strong>${tahun}</strong> bukan tahun kabisat`;
+        }
+      };
+    </script>
+  </body>
+</html>

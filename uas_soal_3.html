@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      .inputContainer {
+        display: flex;
+        flex-direction: column;
+      }
+      .kontenContainer {
+        width: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="kontenContainer">
+      <h1>Pendaftaran Seminar</h1>
+
+      <div class="inputContainer">
+        <label for="nama">Nama</label>
+        <input type="text" id="nama" />
+        <p id="namaMsg"></p>
+      </div>
+      <div class="inputContainer">
+        <label for="email">Email</label>
+        <input type="email" id="email" />
+        <p id="emailMsg"></p>
+      </div>
+      <div class="inputContainer">
+        <label for="tahun">Tahun Lahir</label>
+        <input type="number" id="tahun" min="1900" max="2026" />
+        <p id="tahunMsg"></p>
+      </div>
+
+      <button id="btnDaftar">Daftar</button>
+
+      <div>
+        <h3 id="judulPesan"></h3>
+        <div id="pesanKonten"></div>
+      </div>
+    </div>
+
+    <script>
+      const btnDaftar = document.getElementById("btnDaftar");
+      const namaMsg = document.getElementById("namaMsg");
+      const emailMsg = document.getElementById("emailMsg");
+      const tahunMsg = document.getElementById("tahunMsg");
+      const pesanKonten = document.getElementById("pesanKonten");
+      const judulPesan = document.getElementById("judulPesan");
+
+      btnDaftar.addEventListener("mouseover", () => {
+        namaMsg.innerText = "Nama tidak boleh kosong";
+        emailMsg.innerText = "format email harus menggunakan @";
+        tahunMsg.innerText = "tahun dalam rentang 1900 sampai saat ini";
+
+        setTimeout(() => {
+          namaMsg.innerText = "";
+          emailMsg.innerText = "";
+          tahunMsg.innerText = "";
+        }, 3000);
+      });
+
+      let pesan = "";
+      btnDaftar.addEventListener("click", () => {
+        const nama = document.getElementById("nama").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const tahun = document.getElementById("tahun").value;
+        pesan = "";
+        pesanKonten.innerHTML = "";
+
+        if (!nama) {
+          pesan += "<p>Nama tidak boleh kosong</p>";
+        }
+        if (!email) {
+          pesan += "<p>Email tidak boleh kosong</p>";
+        }
+        if (tahun) {
+          if (tahun < 1900) {
+            pesan += "<p>Tahun tidak boleh kurang dari 1900</p>";
+          }
+          if (tahun > 2026) {
+            pesan += "<p>Tahun tidak boleh lebih dari 2026</p>";
+          }
+        } else {
+          pesan += "<p>Tahun tidak boleh kosong</p>";
+        }
+
+        if (pesan) {
+          judulPesan.innerText = "Perbaiki input berikut";
+          pesanKonten.innerHTML = pesan;
+        } else {
+          judulPesan.innerText = "Pendaftaran berhasil !";
+          const konten = `
+            <p>Nama : ${nama}</p>
+            <p>Email : ${email}</p>
+            <p>Umur : ${tahun}</p>
+            `;
+
+          pesanKonten.innerHTML = konten;
+
+          btnDaftar.innerText = "Berhasil";
+          btnDaftar.setAttribute("disabled", true);
+        }
+      });
+    </script>
+  </body>
+</html>
